@@ -23,8 +23,8 @@ func main() {
 							name
 							supplier{
 								supplierData{
-								code
-								name
+									code
+									name
 								}
 							}
 						}
