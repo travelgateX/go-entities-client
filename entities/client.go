@@ -6,43 +6,60 @@ import (
 	"os"
 
 	"github.com/machinebox/graphql"
-	"github.com/travelgateX/go-entities-client/domain"
+	"github.com/travelgateX/go-entities-client/model"
 )
-
-// DEBUG : log graphql pkg transaction
-const DEBUG = true
 
 // Client : Grapqhql client
 type Client struct {
 	graphql *graphql.Client // graphql client
 	bearer  string          // authentification bearer
+	debug   bool            // log graphql pkg transaction
 }
 
 // NewClient constructor
-func NewClient(bearer, endpoint string, debug bool) Client {
+func NewClient(bearer, endpoint string) Client {
 	cli := graphql.NewClient(endpoint)
-	if debug {
-		cli.Log = func(s string) { log.Println(s) }
-	}
 	return Client{graphql: cli, bearer: bearer}
 }
 
 // NewDefaultClient default constructor
 func NewDefaultClient(bearer string) Client {
-	cli := NewClient(bearer, EntityEndPointDev, DEBUG)
+	cli := NewClient(bearer, EntityEndPointDev)
 	if os.Getenv("DEPLOY_MODE") == "prod" || os.Getenv("DEPLOY_MODE") == "localProd" {
-		cli = NewClient(bearer, EntityEndPointProd, DEBUG)
+		cli = NewClient(bearer, EntityEndPointProd)
 	}
 	return cli
 }
 
-// NewRequest creates new graphql request
-func (c *Client) NewRequest(request string) domain.Data {
+// DebugMode set debug mode
+func (c *Client) DebugMode(debug bool) {
+	if debug {
+		c.graphql.Log = func(s string) { log.Println(s) }
+	} else {
+		c.graphql.Log = func(s string) {}
+	}
+}
+
+// Query creates new graphql query
+func (c *Client) Query(rq string) model.AdminQuery {
 	ctx := context.Background()
-	req := graphql.NewRequest(request)
+	req := graphql.NewRequest(rq)
 	req.Header.Add("Authorization", c.bearer)
 
-	var res domain.Data
+	var res model.AdminQuery
+	if err := c.graphql.Run(ctx, req, &res); err != nil {
+		log.Fatal(err)
+	}
+	return res
+}
+
+// Mutation creates new graphql query
+func (c *Client) Mutation(rq string) model.AdminMutation {
+	ctx := context.Background()
+	req := graphql.NewRequest(rq)
+	req.Header.Add("Authorization", c.bearer)
+
+	var res model.AdminMutation
 	if err := c.graphql.Run(ctx, req, &res); err != nil {
 		log.Fatal(err)
 	}
