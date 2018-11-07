@@ -41,27 +41,27 @@ func (c *Client) DebugMode(debug bool) {
 }
 
 // Query creates new graphql query
-func (c *Client) Query(rq string) model.AdminQuery {
+func (c *Client) Query(rq string) (model.AdminQuery, error) {
 	ctx := context.Background()
 	req := graphql.NewRequest(rq)
 	req.Header.Add("Authorization", c.bearer)
 
 	var res model.AdminQuery
 	if err := c.graphql.Run(ctx, req, &res); err != nil {
-		log.Fatal(err)
+		return model.AdminQuery{}, err
 	}
-	return res
+	return res, nil
 }
 
 // Mutation creates new graphql query
-func (c *Client) Mutation(rq string) model.AdminMutation {
+func (c *Client) Mutation(rq string) (model.AdminMutation, error) {
 	ctx := context.Background()
 	req := graphql.NewRequest(rq)
 	req.Header.Add("Authorization", c.bearer)
 
 	var res model.AdminMutation
 	if err := c.graphql.Run(ctx, req, &res); err != nil {
-		log.Fatal(err)
+		return model.AdminMutation{}, err
 	}
-	return res
+	return res, nil
 }
