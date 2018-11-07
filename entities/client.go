@@ -10,7 +10,7 @@ import (
 )
 
 // DEBUG : log graphql pkg transaction
-const DEBUG = false
+const DEBUG = true
 
 // Client : Grapqhql client
 type Client struct {

@@ -2,8 +2,28 @@ package domain
 
 // Response json response
 type Response struct {
-	Data  Data    `json:"data"`
-	Error []Error `json:"error"`
+	Data struct {
+		Admin struct {
+			DeleteAccessFromGroup struct {
+				AccessData struct {
+					Name              string `json:"name"`
+					Code              string `json:"code"`
+					IsActive          bool   `json:"isActive"`
+					IsTest            bool   `json:"isTest"`
+					IsSchedulerActive bool   `json:"isSchedulerActive"`
+					Owner             struct {
+						Code string `json:"code"`
+					} `json:"owner"`
+					Supplier interface{} `json:"supplier"`
+				} `json:"accessData"`
+				Error interface{} `json:"error"`
+			} `json:"deleteAccessFromGroup"`
+		} `json:"admin"`
+	} `json:"data"`
+	Errors []struct {
+		Message string   `json:"message"`
+		Path    []string `json:"path"`
+	} `json:"errors"`
 }
 
 // Data json response
@@ -13,7 +33,12 @@ type Data struct {
 
 // Admin json response
 type Admin struct {
+	// Querys
 	Accesses Edges `json:"accesses"`
+
+	// Mutations
+	GrantAccessToGroup    GrantAccessToGroup    `json:"grantAccessToGroup"`
+	DeleteAccessFromGroup DeleteAccessFromGroup `json:"deleteAccessFromGroup"`
 }
 
 // Edges json response
@@ -30,7 +55,7 @@ type Edge struct {
 type Node struct {
 	Code       string     `json:"code"`
 	AccessData AccessData `json:"accessData"`
-	Errors     []Error    `json:"error"`
+	Errors     Error      `json:"error"`
 	CreatedAt  string     `json:"createdAt"`
 	UpdatedAt  string     `json:"updatedAt"`
 }
@@ -50,29 +75,16 @@ type Error []struct {
 	Description string `json:"description"`
 }
 
+// DataError json response
+type DataError []struct {
+	Message string   `json:"message"`
+	Path    []string `json:"path"`
+}
+
 // Owner json response
 type Owner struct {
 	Code      string `json:"code"`
 	CreatedAt string `json:"createdAt"`
 	UpdatedAt string `json:"updatedAt"`
-	Error     []struct {
-		Code        string `json:"code"`
-		Description string `json:"description"`
-		Type        string `json:"type"`
-	} `json:"error"`
-}
-
-// Supplier json response
-type Supplier struct {
-	Code         string `json:"code"`
-	CreatedAt    string `json:"createdAt"`
-	UpdatedAt    string `json:"updatedAt"`
-	SupplierData struct {
-		Code          string `json:"code"`
-		Name          string `json:"name"`
-		IsActive      bool   `json:"isActive"`
-		Context       string `json:"context"`
-		ServiceAPI    int    `json:"serviceApi"`
-		SupplierGroup string `json:"supplierGroup"`
-	} `json:"supplierData"`
+	Errors    Error  `json:"error"`
 }
