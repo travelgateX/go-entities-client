@@ -1,0 +1,7 @@
+[[constraint]]
+  name = "github.com/machinebox/graphql"
+  version = "0.2.2"
+
+[prune]
+  go-tests = true
+  unused-packages = true
