@@ -1,5 +1,5 @@
 # go-entities-client
-GraphQL client to connect with the TravelgateX Entities API
+GraphQL Go client to connect with the TravelgateX Entities API
 
 * Entities API strong Go types for response data
 * Build and execute any Entities API request
@@ -10,17 +10,17 @@ GraphQL client to connect with the TravelgateX Entities API
 Make sure you have a working Go environment. To install go-entities-client, simply run:
 
 ```
-$ go github.com/travelgateX/go-entities-client
+$ go get github.com/travelgateX/go-entities-client
 ```
 
 ## Initialization
 The service endpoint can be provide or you can let the library choose the endpoint depending on the environment variable DEPLOY_MODE. Also you must provide a valid TravelgateX bearer with permission to manage the EntitiesAPI. There are two constructors:
 ```go
-// Default client, endpoint chosen by DEPLOY_MODE environment variable
-ent := entities.NewDefaultClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImt...")
-
 // Entities client, endpoint provided
 ent := entities.NewClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImt...", "https://api...")
+
+// Entities default client, endpoint chosen by DEPLOY_MODE environment variable
+ent := entities.NewDefaultClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImt...")
 ```
 
 ## Usage
@@ -57,3 +57,10 @@ ent.DebugMode(true)
 res, err := ent.Accesses(5)
 
 ```
+
+## Contribution
+1. Fork ( https://github.com/[my-github-username]/go-entities-client/fork )
+2. Create new feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push branch (`git push origin my-new-feature`)
+5. Create new Pull Request
