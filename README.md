@@ -58,6 +58,14 @@ res, err := ent.Accesses(5)
 
 ```
 
+## Road Map
+Interesting features to develop:
+
+* Add unit tests
+* Synchronization of the data model from the endpoint
+* More request templates of the most used functions
+* Possibility of obtaining raw response without fit the result with the data model
+
 ## Contribution
 1. Fork ( https://github.com/[my-github-username]/go-entities-client/fork )
 2. Create new feature branch (`git checkout -b my-new-feature`)
