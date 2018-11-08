@@ -1,10 +1,22 @@
-// Package entities provides basic tools to execute graphql requests for API Entites
+// Package entities is a tool to connect to the "Entities API Graphql" endpoint.
+// There are functions that it provides basic requests for common use or you
+// can use the NewQuery/NewMutation main functions.
 //
-// Example of use:
+// WARNING: 'EntitiesAPI' is a Graphql server, requests can not be typed so if you
+// need more personalized request use the client Query/Mutation main function.
 //
-// 		ent := entities.NewDefaultClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N ....")
-// 		res, _ := ent.NewQuery(`query{admin{accesses(filter:{accessID:5}){edges{ ....`)
+// Example of templates use:
+//
+// 		ent := entities.NewDefaultClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N...")
+// 		res, _ := ent.Accesses(115)
 // 		fmt.Printf("Access.name = %v", res.Query.Accesses.Edges[0].Node.AccessData.Name)
+//
+// Example of basic use:
+//
+// 		ent := entities.NewDefaultClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N...")
+// 		res, _ := ent.NewQuery(`query{admin{accesses(...) ...`)
+// 		fmt.Printf("Access.name = %v", res.Query.Accesses.Edges[0].Node.AccessData.Name)
+//
 package entities
 
 import (
@@ -14,6 +26,12 @@ import (
 
 	"github.com/machinebox/graphql"
 	"github.com/travelgateX/go-entities-client/model"
+)
+
+// Entities API end points
+const (
+	EntityEndPointProd = "https://api-core.travelgatex.com/entities/query"
+	EntityEndPointDev  = "https://dev-api-core.travelgatex.com/entities/query"
 )
 
 // Client : Grapqhql client
@@ -71,4 +89,20 @@ func (c *Client) NewMutation(rq string) (model.AdminMutation, error) {
 		return model.AdminMutation{}, err
 	}
 	return res, nil
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+///// Query Functions helpers /////
+
+// Accesses Entities API query function
+func (c *Client) Accesses(id int) (model.AdminQuery, error) {
+	return c.NewQuery(accessesRQ(id))
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+///// Mutation Functions helpers /////
+
+// GrantAccessToGroup Entities API mutation function
+func (c *Client) GrantAccessToGroup(id int, groups []string) (model.AdminMutation, error) {
+	return c.NewMutation(grantAccessToGroupRQ(id, groups))
 }
