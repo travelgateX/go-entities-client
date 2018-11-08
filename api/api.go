@@ -1,9 +1,16 @@
 // Package api ...
+//
 // The 'EntitiesApi' is a tool to connect to the "Entities API Graphql" endpoint.
 // There are functions that it provides basic requests for common use.
 //
 // WARNING: 'EntitiesAPI' is a Graphql server, requests can not be typed so if you
 // need more personalized request use the client Query/Mutation main function.
+//
+// Example of use:
+//
+// 		ent := api.NewDefaultEntitiesAPI("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N...")
+// 		res, _ := ent.Accesses(115)
+// 		fmt.Printf("Access.name = %v", res.Query.Accesses.Edges[0].Node.AccessData.Name)
 package api
 
 import (
