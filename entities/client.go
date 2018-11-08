@@ -1,3 +1,10 @@
+// Package entities provides basic tools to execute graphql requests for API Entites
+//
+// Example of use:
+//
+// 		ent := entities.NewDefaultClient("Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1N ....")
+// 		res, _ := ent.NewQuery(`query{admin{accesses(filter:{accessID:5}){edges{ ....`)
+// 		fmt.Printf("Access.name = %v", res.Query.Accesses.Edges[0].Node.AccessData.Name)
 package entities
 
 import (
