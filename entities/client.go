@@ -90,19 +90,3 @@ func (c *Client) NewMutation(rq string) (model.AdminMutation, error) {
 	}
 	return res, nil
 }
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-///// Query Functions helpers /////
-
-// Accesses Entities API query function
-func (c *Client) Accesses(id int) (model.AdminQuery, error) {
-	return c.NewQuery(accessesRQ(id))
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-///// Mutation Functions helpers /////
-
-// GrantAccessToGroup Entities API mutation function
-func (c *Client) GrantAccessToGroup(id int, groups []string) (model.AdminMutation, error) {
-	return c.NewMutation(grantAccessToGroupRQ(id, groups))
-}
