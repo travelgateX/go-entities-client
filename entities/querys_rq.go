@@ -1,35 +1,24 @@
 package entities
 
-import (
-	"strconv"
-	"strings"
-)
-
 // accessesRQ returns graphql request query
-func accessesRQ(id int) string {
-	rq := `
-		query{
-			admin{
-				accesses(filter:{
-					accessID:$ID$
-				}){
-					edges{
-						node{
-							accessData{
-								name
-								code
-								supplier{
-									supplierData{
-										code
-										name
-									}
-								}
-							}
-						}
-					}
+func accessesRQ() string {
+	return `
+	  {
+		admin {
+		  accesses {
+			edges {
+			  node {
+				accessData {
+				  name
+				  code
+				  isActive
+				  isTest
+				  markets
 				}
+			  }
 			}
+		  }
 		}
+	  }	  
 	`
-	return strings.Replace(rq, "$ID$", strconv.Itoa(id), 1)
 }

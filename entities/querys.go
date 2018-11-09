@@ -7,8 +7,8 @@ import (
 )
 
 // Accesses Entities API query function
-func (c *Client) Accesses(id int) (model.AdminQuery, error) {
-	return c.NewQuery(accessesRQ(id))
+func (c *Client) Accesses() (model.AdminQuery, error) {
+	return c.NewQuery(accessesRQ())
 }
 
 // Suppliers Entities API query function
