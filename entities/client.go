@@ -38,7 +38,6 @@ const (
 type Client struct {
 	graphql *graphql.Client // graphql client
 	bearer  string          // authentification bearer
-	debug   bool            // log graphql pkg transaction
 }
 
 // NewClient constructor
