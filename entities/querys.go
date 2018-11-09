@@ -11,6 +11,11 @@ func (c *Client) Accesses() (model.AdminQuery, error) {
 	return c.NewQuery(accessesRQ())
 }
 
+// AccessesByGroupCode Entities API query function
+func (c *Client) AccessesByGroupCode(grCode string) (model.AdminQuery, error) {
+	return c.NewQuery(accessesByGroupCodeRQ(grCode))
+}
+
 // Suppliers Entities API query function
 func (c *Client) Suppliers() (model.AdminQuery, error) {
 	return model.AdminQuery{}, errors.New("not implemented")
