@@ -17,8 +17,8 @@ func (c *Client) UpdateAccess() (model.AdminMutation, error) {
 }
 
 // GrantAccessToGroup Entities API mutation function
-func (c *Client) GrantAccessToGroup(id int, groups []string) (model.AdminMutation, error) {
-	return c.NewMutation(grantAccessToGroupRQ(id, groups))
+func (c *Client) GrantAccessToGroup(code int, groups []string) (model.AdminMutation, error) {
+	return c.NewMutation(grantAccessToGroupRQ(code, groups))
 }
 
 // DeleteAccessFromGroup Entities API mutation function
