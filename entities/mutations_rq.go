@@ -8,7 +8,7 @@ import (
 // grantAccessToGroupRQ returns graphql request mutation
 func grantAccessToGroupRQ(id int, groups []string) string {
 	rq := `
-	  mutation{
+		mutation{
 			admin{
 				grantAccessToGroup(input:{
 					id:$ID$
@@ -22,9 +22,33 @@ func grantAccessToGroupRQ(id int, groups []string) string {
 					}
 				}
 			}
-	  }    
+	  	}    
 	`
 	rq = strings.Replace(rq, "$ID$", strconv.Itoa(id), 1)
+	rq = strings.Replace(rq, "$GROUPS$", sliceToQuotedStringFormat(groups), 1)
+	return rq
+}
+
+// grantSupplierToGroupRQ returns graphql request mutation
+func grantSupplierToGroupRQ(id string, groups []string) string {
+	rq := `
+	  	mutation{
+			admin{
+		  		grantSupplierToGroup(input:{
+					id:"$ID$"
+					groups:$GROUPS$
+		  		}){
+					code
+					error{
+						code
+						type
+						description
+					}
+		  		}
+			}
+	  	}	    
+	`
+	rq = strings.Replace(rq, "$ID$", id, 1)
 	rq = strings.Replace(rq, "$GROUPS$", sliceToQuotedStringFormat(groups), 1)
 	return rq
 }
