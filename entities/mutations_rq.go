@@ -52,3 +52,51 @@ func grantSupplierToGroupRQ(id string, groups []string) string {
 	rq = strings.Replace(rq, "$GROUPS$", sliceToQuotedStringFormat(groups), 1)
 	return rq
 }
+
+// deleteAccessFromGroupRQ returns graphql request mutation
+func deleteAccessFromGroupRQ(id int, groups []string) string {
+	rq := `
+		mutation{
+			admin{
+				deleteAccessFromGroup(input:{
+					id:$ID$
+					groups:$GROUPS$
+				}){
+					code
+					error{
+						code
+						type
+						description
+					}
+				}
+			}
+	  	}    
+	`
+	rq = strings.Replace(rq, "$ID$", strconv.Itoa(id), 1)
+	rq = strings.Replace(rq, "$GROUPS$", sliceToQuotedStringFormat(groups), 1)
+	return rq
+}
+
+// deleteSupplierFromGroupRQ returns graphql request mutation
+func deleteSupplierFromGroupRQ(id string, groups []string) string {
+	rq := `
+	  	mutation{
+			admin{
+		  		deleteSupplierFromGroup(input:{
+					id:"$ID$"
+					groups:$GROUPS$
+		  		}){
+					code
+					error{
+						code
+						type
+						description
+					}
+		  		}
+			}
+	  	}	    
+	`
+	rq = strings.Replace(rq, "$ID$", id, 1)
+	rq = strings.Replace(rq, "$GROUPS$", sliceToQuotedStringFormat(groups), 1)
+	return rq
+}

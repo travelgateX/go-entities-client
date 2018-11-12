@@ -22,8 +22,8 @@ func (c *Client) GrantAccessToGroup(id int, groups []string) (model.AdminMutatio
 }
 
 // DeleteAccessFromGroup Entities API mutation function
-func (c *Client) DeleteAccessFromGroup() (model.AdminMutation, error) {
-	return model.AdminMutation{}, errors.New("not implemented")
+func (c *Client) DeleteAccessFromGroup(id int, groups []string) (model.AdminMutation, error) {
+	return c.NewMutation(deleteAccessFromGroupRQ(id, groups))
 }
 
 // GrantSupplierToGroup Entities API mutation function
@@ -32,8 +32,8 @@ func (c *Client) GrantSupplierToGroup(id string, groups []string) (model.AdminMu
 }
 
 // DeleteSupplierFromGroup Entities API mutation function
-func (c *Client) DeleteSupplierFromGroup() (model.AdminMutation, error) {
-	return model.AdminMutation{}, errors.New("not implemented")
+func (c *Client) DeleteSupplierFromGroup(id string, groups []string) (model.AdminMutation, error) {
+	return c.NewMutation(deleteSupplierFromGroupRQ(id, groups))
 }
 
 // GrantClientToGroup Entities API mutation function
