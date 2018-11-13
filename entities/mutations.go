@@ -28,6 +28,9 @@ func (c *Client) DeleteAccessFromGroup(id int, groups []string) (model.AdminMuta
 
 // GrantSupplierToGroup Entities API mutation function
 func (c *Client) GrantSupplierToGroup(id string, groups []string) (model.AdminMutation, error) {
+	if id == "" {
+		return model.AdminMutation{}, errors.New("supplier id can't be blank")
+	}
 	return c.NewMutation(grantSupplierToGroupRQ(id, groups))
 }
 
