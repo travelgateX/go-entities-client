@@ -162,7 +162,6 @@ type CreateClientInput struct {
 	Name     string `json:"name"`
 	IsActive bool   `json:"isActive"`
 	Group    string `json:"group"`
-	Owner    string `json:"owner"`
 }
 
 type CreateProfileInput struct {

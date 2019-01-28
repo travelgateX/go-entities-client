@@ -49,6 +49,11 @@ func (c *Client) DeleteClientFromGroup() (model.AdminMutation, error) {
 	return model.AdminMutation{}, errors.New("not implemented")
 }
 
+// CreateDefaultClient Entities API mutation function
+func (c *Client) CreateDefaultClient(input model.CreateClientInput) (model.AdminMutation, error) {
+	return c.NewMutation(createDefaultClient(input))
+}
+
 // CreateClient Entities API mutation function
 func (c *Client) CreateClient() (model.AdminMutation, error) {
 	return model.AdminMutation{}, errors.New("not implemented")
