@@ -1,10 +1,10 @@
 package entities
 
 import (
+	"github.com/travelgateX/go-entities-client/model"
+	"log"
 	"strconv"
 	"strings"
-
-	"github.com/travelgateX/go-entities-client/model"
 )
 
 // grantAccessToGroupRQ returns graphql request mutation
@@ -110,7 +110,7 @@ func createDefaultClient(input model.CreateClientInput) string {
 			admin{
 				createClient(input:{
 					name: "$NAME$"
-					isActive: "$ACTIVE$"
+					isActive: $ACTIVE$
 					group: "$GROUP$"
 				}){
 					code
@@ -127,5 +127,6 @@ func createDefaultClient(input model.CreateClientInput) string {
 	rq = strings.Replace(rq, "$NAME$", input.Name, 1)
 	rq = strings.Replace(rq, "$ACTIVE$", strconv.FormatBool(input.IsActive), 1)
 	rq = strings.Replace(rq, "$GROUP$", input.Group, 1)
+	log.Printf("QUERY", rq)
 	return rq
 }
