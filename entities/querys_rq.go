@@ -103,3 +103,32 @@ func suppliersByGroupCodeRQ(grCode string) string {
 	rq = strings.Replace(rq, "$CODE$", grCode, 1)
 	return rq
 }
+
+// clientByGroupCodeRQ returns graphql request query
+func clientByGroupCodeRQ(grCode string) string {
+	rq := `
+        query{
+            admin{
+            clients(filter:{
+                groupID: "$CODE$"      
+            }) {
+                edges {
+                    node {
+                        code
+                        clientData{
+                            code
+                        }
+                        error{
+                            code
+                            type
+                            description
+                        }
+                    }
+                }
+            }
+        }
+        }
+    `
+	rq = strings.Replace(rq, "$CODE$", grCode, 1)
+	return rq
+}
