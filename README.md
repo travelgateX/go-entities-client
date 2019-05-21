@@ -53,7 +53,7 @@ if err != nil {
 
 // Debug Mode to log transactions
 // set 'true' before run a transaction
-ent.DebugMode(true)
+ent.DebugMode(false)
 res, err := ent.Accesses(5)
 
 ```
