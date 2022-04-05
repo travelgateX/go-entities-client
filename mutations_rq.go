@@ -108,7 +108,7 @@ func createDefaultClient(input model.CreateClientInput) string {
 	rq := `
 		mutation{
 			admin{
-				createClient(input:{
+				createClient(data:{
 					name: "$NAME$"
 					isActive: $ACTIVE$
 					group: "$GROUP$"
