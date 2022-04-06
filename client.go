@@ -30,8 +30,8 @@ import (
 
 // Entities API end points
 const (
-	EntityEndPointProd = "https://api.travelgatex.com/entities/query"
-	EntityEndPointDev  = "https://dev-api.travelgatex.com/entities/query"
+	EntityEndPointProd = "https://api.travelgatex.com"
+	EntityEndPointDev  = "https://dev-api.travelgatex.com"
 )
 
 // Client : Grapqhql client
