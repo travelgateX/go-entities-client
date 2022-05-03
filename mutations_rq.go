@@ -114,12 +114,11 @@ func createDefaultClient(input model.CreateClientInput) string {
 					group: "$GROUP$"
 				}){
 					code
-					error{
+					adviseMessage{
 						code
-						type
 						description
+						level
 					}
-				
 				}
 			}
 		}
