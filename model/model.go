@@ -98,13 +98,14 @@ type Mutation struct {
 }
 
 type Query struct {
-	Accesses     AccessConnection      `json:"accesses"`
-	Suppliers    SupplierConnection    `json:"suppliers"`
-	Clients      ClientConnection      `json:"clients"`
-	ServiceAPI   ServiceApi            `json:"serviceApi"`
-	PointsOfSale PointOfSaleConnection `json:"pointsOfSale"`
-	Profiles     ProfileConnection     `json:"profiles"`
-	Entities     EntityConnection      `json:"entities"`
+	Accesses            AccessConnection      `json:"accesses"`
+	Suppliers           SupplierConnection    `json:"suppliers"`
+	Clients             ClientConnection      `json:"clients"`
+	ClientsByGroupCodes ClientConnection      `json:"clientsByGroupCodes"`
+	ServiceAPI          ServiceApi            `json:"serviceApi"`
+	PointsOfSale        PointOfSaleConnection `json:"pointsOfSale"`
+	Profiles            ProfileConnection     `json:"profiles"`
+	Entities            EntityConnection      `json:"entities"`
 }
 
 type AdviseMessage interface {
