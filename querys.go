@@ -28,6 +28,11 @@ func (c *Client) SuppliersByGroupCode(grCode string) (model.AdminQuery, error) {
 
 // ClientByGroupCode Entities API query function
 func (c *Client) ClientByGroupCode(grCode string) (model.AdminQuery, error) {
+	return c.NewQuery(getClientsByGroupCodesRq(grCode))
+}
+
+// ClientByGroupCode Entities API query function
+func (c *Client) ClientByGroupCode(grCode string) (model.AdminQuery, error) {
 	return c.NewQuery(clientByGroupCodeRQ(grCode))
 }
 
